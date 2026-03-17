@@ -1,0 +1,27 @@
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace Module3_ASP_NET_RazorPage.Pages
+{
+    public class Index2Model : PageModel
+    {
+        [BindProperty]
+        [Required(ErrorMessage = "Name Required")]
+        public string Name { get; set; } = string.Empty;
+
+        public void OnGet()
+        {
+        }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid) {
+                return Page();
+            }
+         
+            Name += " Văn An";
+            return Page();
+        }
+    }
+}

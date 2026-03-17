@@ -1,0 +1,234 @@
+﻿@page
+@model Module3_ASP_NET_RazorPage.Pages.Chat.IndexModel
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Chat Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .input-section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f5f5f5;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+        }
+        .input-group input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #userName {
+            width: 200px;
+        }
+        #messageInput {
+            width: 400px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        .chat-area {
+            border: 1px solid #999;
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            border-radius: 4px;
+        }
+        .chat-message {
+            margin-bottom: 12px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .message-header {
+            margin-bottom: 5px;
+        }
+        .message-user {
+            font-weight: bold;
+            color: #0066cc;
+        }
+        .message-time {
+            color: #999;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+        .message-content {
+            color: #333;
+            word-wrap: break-word;
+        }
+        .empty-message {
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💬 Real-time Chat Demo</h1>
+    
+    <div class="input-section">
+        <div class="input-group">
+            <label for="userName">Tên bạn:</label>
+            <input type="text" id="userName" placeholder="Nhập tên của bạn" />
+        </div>
+        
+        <div class="input-group">
+            <label for="messageInput">Tin nhắn:</label>
+            <input type="text" id="messageInput" placeholder="Nhập tin nhắn (hoặc bấm Enter để gửi)" />
+            <button onclick="sendMessage()">Gửi</button>
+        </div>
+    </div>
+
+    <div class="chat-area" id="chatArea">
+        <div class="empty-message">Chưa có tin nhắn. Hãy bắt đầu chat!</div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .withAutomaticReconnect()
+        .build();
+
+    let messages = [];
+
+    async function loadMessages() {
+        try {
+            const response = await fetch('/Chat?handler=GetMessages');
+            if (response.ok) {
+                messages = await response.json();
+                renderMessages();
+            }
+        } catch (error) {
+            console.error('Error loading messages:', error);
+        }
+    }
+
+    function renderMessages() {
+        const chatArea = document.getElementById('chatArea');
+        chatArea.innerHTML = '';
+        
+        if (messages.length === 0) {
+            chatArea.innerHTML = '<div class="empty-message">Chưa có tin nhắn. Hãy bắt đầu chat!</div>';
+            return;
+        }
+
+        messages.forEach(msg => {
+            const time = new Date(msg.timestamp).toLocaleTimeString('vi-VN');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-message';
+            msgDiv.innerHTML = `
+                <div class="message-header">
+                    <span class="message-user">${escapeHtml(msg.userName)}</span>
+                    <span class="message-time">${time}</span>
+                </div>
+                <div class="message-content">${escapeHtml(msg.message)}</div>
+            `;
+            chatArea.appendChild(msgDiv);
+        });
+
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    function sendMessage() {
+        const userNameInput = document.getElementById('userName');
+        const messageInput = document.getElementById('messageInput');
+        const userName = userNameInput.value.trim();
+        const message = messageInput.value.trim();
+
+        if (!userName) {
+            alert('Vui lòng nhập tên người dùng!');
+            userNameInput.focus();
+            return;
+        }
+
+        if (!message) {
+            alert('Vui lòng nhập tin nhắn!');
+            messageInput.focus();
+            return;
+        }
+
+        connection.invoke("SendMessage", userName, message)
+            .then(() => {
+                messageInput.value = '';
+                messageInput.focus();
+            })
+            .catch(err => {
+                console.error('Error sending message:', err);
+                alert('Lỗi khi gửi tin nhắn!');
+            });
+    }
+
+    document.getElementById('messageInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    document.getElementById('userName').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('messageInput').focus();
+        }
+    });
+
+    connection.on("ReceiveMessage", (chatMessage) => {
+        messages.push(chatMessage);
+        renderMessages();
+    });
+
+    connection.start()
+        .then(() => {
+            console.log('✓ Kết nối ChatHub thành công');
+            loadMessages();
+        })
+        .catch(err => {
+            console.error('❌ Lỗi kết nối:', err);
+            document.getElementById('chatArea').innerHTML = '<div class="empty-message" style="color: red;">Lỗi kết nối SignalR. Vui lòng F5 tải lại trang.</div>';
+        });
+</script>
+
+</body>
+</html>

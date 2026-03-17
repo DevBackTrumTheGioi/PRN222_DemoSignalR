@@ -1,0 +1,274 @@
+﻿@page
+@model Module3_ASP_NET_RazorPage.Pages.Products.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 10px;
+        }
+        .message {
+            display: none;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .message.show {
+            display: block;
+        }
+        .toolbar {
+            margin-bottom: 20px;
+        }
+        .btn-create {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn-create:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table thead {
+            background-color: #0066cc;
+            color: white;
+        }
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        table tbody tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+        .btn-edit {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            margin-right: 5px;
+            font-size: 0.9em;
+        }
+        .btn-edit:hover {
+            background-color: #0052a3;
+        }
+        .btn-delete {
+            padding: 6px 12px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+        .no-products {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-style: italic;
+        }
+        .empty-state {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📦 Quản lý Sản phẩm</h1>
+
+    <div id="message" class="message"></div>
+
+    <div class="toolbar">
+        <a href="/Products/Create" class="btn-create">+ Thêm sản phẩm mới</a>
+    </div>
+
+    <div id="tableContainer">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Tồn kho</th>
+                    <th>Ngừng bán</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="productsTable">
+            </tbody>
+        </table>
+        <p id="noProducts" class="no-products">❌ Không có sản phẩm nào</p>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/productHub")
+        .withAutomaticReconnect()
+        .build();
+
+    let products = [];
+
+    function showMessage(text) {
+        const msg = document.getElementById('message');
+        msg.textContent = text;
+        msg.classList.add('show');
+        setTimeout(() => {
+            msg.classList.remove('show');
+        }, 3000);
+    }
+
+    async function loadProducts() {
+        try {
+            const response = await fetch('/Products?handler=GetProducts');
+            if (response.ok) {
+                products = await response.json();
+                renderProducts();
+            }
+        } catch (error) {
+            console.error('Error loading products:', error);
+            showMessage('❌ Lỗi khi tải sản phẩm');
+        }
+    }
+
+    function renderProducts() {
+        const tbody = document.getElementById('productsTable');
+        const noProducts = document.getElementById('noProducts');
+        
+        tbody.innerHTML = '';
+        
+        if (products.length === 0) {
+            noProducts.style.display = 'block';
+            return;
+        }
+        
+        noProducts.style.display = 'none';
+        
+        products.forEach(p => {
+            const row = tbody.insertRow();
+            row.id = 'product-' + p.productId;
+            row.innerHTML = `
+                <td>${p.productId}</td>
+                <td><strong>${escapeHtml(p.productName)}</strong></td>
+                <td>${p.unitPrice ? p.unitPrice.toLocaleString('vi-VN') + ' đ' : '-'}</td>
+                <td>${p.unitsInStock || 0}</td>
+                <td>${p.discontinued ? '✓ Có' : '✗ Không'}</td>
+                <td class="action-buttons">
+                    <a href="/Products/Edit?id=${p.productId}" class="btn-edit">Sửa</a>
+                    <button class="btn-delete" onclick="deleteProduct(${p.productId})">Xóa</button>
+                </td>
+            `;
+        });
+    }
+
+    function escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    function deleteProduct(id) {
+        const productName = products.find(p => p.productId === id)?.productName || 'sản phẩm';
+        
+        if (confirm(`Bạn có chắc muốn xóa sản phẩm "${productName}" này không?`)) {
+            fetch('/Products?handler=Delete&id=' + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    loadProducts();
+                    showMessage('✓ Xóa sản phẩm thành công');
+                } else {
+                    showMessage('❌ Lỗi khi xóa sản phẩm');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting product:', error);
+                showMessage('❌ Lỗi khi xóa sản phẩm');
+            });
+        }
+    }
+
+    connection.on("ReceiveNotification", (notification) => {
+        const typeIcon = {
+            'Added': '✓ Thêm',
+            'Updated': '✎ Cập nhật',
+            'Deleted': '✕ Xóa'
+        };
+        const type = typeIcon[notification.notificationType] || notification.notificationType;
+        showMessage(`${type}: ${notification.productName}`);
+        loadProducts();
+    });
+
+    connection.start()
+        .then(() => {
+            console.log('✓ Kết nối ProductHub thành công');
+            loadProducts();
+        })
+        .catch(err => {
+            console.error('❌ Lỗi kết nối:', err);
+            loadProducts();
+        });
+</script>
+
+</body>
+</html>
+
+

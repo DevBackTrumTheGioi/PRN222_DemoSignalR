@@ -1,0 +1,10 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@functions {
+	[BindProperty]
+	public string Name { get; set; } = string.Empty;
+// dotnet ef dbcontext scaffold "server=localhost; database=Northwind;uid=sa;pwd=123;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models
+	
+}
+
+

@@ -1,0 +1,216 @@
+﻿@page
+@model Module3_ASP_NET_RazorPage.Pages.Notifications.IndexModel
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử Thông báo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 10px;
+        }
+        .toolbar {
+            margin-bottom: 15px;
+        }
+        .btn-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .btn-link:hover {
+            background-color: #0052a3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table thead {
+            background-color: #0066cc;
+            color: white;
+        }
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        table tbody tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+        .type-added {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .type-updated {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .type-deleted {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .no-notifications {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🔔 Lịch sử Thông báo</h1>
+
+    <div class="toolbar">
+        <a href="/Products" class="btn-link">← Quay lại Sản phẩm</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Thời gian</th>
+                <th>ID Sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Loại sự kiện</th>
+            </tr>
+        </thead>
+        <tbody id="notificationsTable">
+        </tbody>
+    </table>
+
+    <p id="noNotifications" class="no-notifications">❌ Chưa có thông báo nào</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/productHub")
+        .withAutomaticReconnect()
+        .build();
+
+    let notifications = [];
+
+    async function loadNotifications() {
+        try {
+            const response = await fetch('/Notifications?handler=GetNotifications');
+            if (response.ok) {
+                notifications = await response.json();
+                renderNotifications();
+            }
+        } catch (error) {
+            console.error('Error loading notifications:', error);
+        }
+    }
+
+    function getTypeElement(type) {
+        const iconMap = {
+            'Added': '✓ Thêm',
+            'Updated': '✎ Cập nhật',
+            'Deleted': '✕ Xóa'
+        };
+        const classMap = {
+            'Added': 'type-added',
+            'Updated': 'type-updated',
+            'Deleted': 'type-deleted'
+        };
+        return `<span class="${classMap[type] || ''}">${iconMap[type] || type}</span>`;
+    }
+
+    function renderNotifications() {
+        const tbody = document.getElementById('notificationsTable');
+        const noNotifications = document.getElementById('noNotifications');
+        
+        tbody.innerHTML = '';
+        
+        if (notifications.length === 0) {
+            noNotifications.style.display = 'block';
+            return;
+        }
+        
+        noNotifications.style.display = 'none';
+        
+        notifications.forEach(n => {
+            const row = tbody.insertRow(0);
+            const time = new Date(n.timestamp).toLocaleString('vi-VN');
+            row.innerHTML = `
+                <td>${time}</td>
+                <td>#${n.productId}</td>
+                <td><strong>${escapeHtml(n.productName)}</strong></td>
+                <td>${getTypeElement(n.notificationType)}</td>
+            `;
+        });
+    }
+
+    function escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    connection.on("ReceiveNotification", (notification) => {
+        notifications.unshift(notification);
+        if (notifications.length > 100) {
+            notifications.pop();
+        }
+        renderNotifications();
+    });
+
+    connection.start()
+        .then(() => {
+            console.log('✓ Kết nối ProductHub thành công');
+            loadNotifications();
+        })
+        .catch(err => {
+            console.error('❌ Lỗi kết nối:', err);
+            loadNotifications();
+        });
+</script>
+
+</body>
+</html>
+

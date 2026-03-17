@@ -1,0 +1,206 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\pages\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\pages\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\pages\\products\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\pages\\products\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\pages\\products\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\pages\\products\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\pages\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\pages\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\models\\northwindcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\models\\northwindcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\module3_asp_net_razorpage.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\module3_asp_net_razorpage.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|d:\\prn222\\module3_asp_net_razorpage\\module3_asp_net_razorpage\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{40742ED6-7ECC-4EBB-88F1-D27DC5AC1FF1}|Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj|solutionrelative:module3_asp_net_razorpage\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml.cs",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml.cs",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-06T10:01:33.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-06T10:01:16.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Models\\Product.cs",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Models\\Product.cs",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-06T08:41:59.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml.cs",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml.cs",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAswDIAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T08:06:41.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Pages\\Products\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-04T08:05:45.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NorthwindContext.cs",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Models\\NorthwindContext.cs",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Models\\NorthwindContext.cs",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Models\\NorthwindContext.cs",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Models\\NorthwindContext.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAA0wEcAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T07:57:53.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Program.cs",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Program.cs",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Program.cs",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T06:36:16.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\appsettings.json",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\appsettings.json",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\appsettings.json",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-04T07:58:36.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Pages\\Index.cshtml",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Pages\\Index.cshtml",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-04T06:41:24.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Module3_ASP_NET_RazorPage.csproj",
+              "DocumentMoniker": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj",
+              "RelativeDocumentMoniker": "Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj",
+              "ToolTip": "D:\\PRN222\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj",
+              "RelativeToolTip": "Module3_ASP_NET_RazorPage\\Module3_ASP_NET_RazorPage.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-04T06:40:08.888Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 377,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

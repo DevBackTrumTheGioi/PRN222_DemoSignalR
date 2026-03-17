@@ -1,0 +1,19 @@
+﻿@page
+@model Module3_ASP_NET_RazorPage.Pages.Index2Model
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+
+<div style="margin-top: 30px;">
+	page model
+	<form method="post">
+		@Html.AntiForgeryToken()
+		<input type="text" name="@Model.Name" />
+		<div><input type="submit" /></div>
+	</form>
+
+	@if (!string.IsNullOrEmpty(Model.Name))
+	{
+		<p>Hello, @Model.Name!</p>
+	}
+</div>
