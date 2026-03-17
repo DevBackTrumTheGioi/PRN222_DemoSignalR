@@ -7,109 +7,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-time Chat Demo</title>
+    <title>Nhắn tin Real-time</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
+        
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
         }
-        .input-section {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-bottom: 15px;
-            background-color: #f5f5f5;
-        }
-        .input-group {
-            margin-bottom: 10px;
-        }
-        .input-group label {
-            display: inline-block;
-            width: 120px;
-            font-weight: bold;
-        }
-        .input-group input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        #userName {
-            width: 200px;
-        }
-        #messageInput {
-            width: 400px;
-        }
-        button {
-            padding: 8px 20px;
-            background-color: #0066cc;
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
+            padding: 20px;
+            text-align: center;
         }
-        button:hover {
-            background-color: #0052a3;
+        
+        .header h1 {
+            font-size: 28px;
+            margin: 0;
         }
+        
+        .header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+        }
+        
         .chat-area {
-            border: 1px solid #999;
-            padding: 15px;
-            height: 400px;
+            flex: 1;
             overflow-y: auto;
-            background-color: #fafafa;
-            border-radius: 4px;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
+        
         .chat-message {
-            margin-bottom: 12px;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            animation: slideIn 0.3s ease-in;
         }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         .message-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 5px;
         }
+        
         .message-user {
             font-weight: bold;
-            color: #0066cc;
+            color: #667eea;
+            padding: 3px 8px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            font-size: 0.9em;
         }
+        
         .message-time {
             color: #999;
-            font-size: 0.85em;
-            margin-left: 10px;
+            font-size: 0.8em;
         }
+        
         .message-content {
+            background-color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
             color: #333;
             word-wrap: break-word;
+            line-height: 1.4;
+            border-left: 3px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
+        
         .empty-message {
             color: #ccc;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
+            font-style: italic;
+        }
+        
+        .input-section {
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9em;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+            background-color: #f8f9ff;
+        }
+        
+        .message-input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .message-input-group input {
+            flex: 1;
+        }
+        
+        button {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .toolbar {
+            padding: 10px 15px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn-link {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-link:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .stats {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>💬 Real-time Chat Demo</h1>
-    
-    <div class="input-section">
-        <div class="input-group">
-            <label for="userName">Tên bạn:</label>
-            <input type="text" id="userName" placeholder="Nhập tên của bạn" />
-        </div>
-        
-        <div class="input-group">
-            <label for="messageInput">Tin nhắn:</label>
-            <input type="text" id="messageInput" placeholder="Nhập tin nhắn (hoặc bấm Enter để gửi)" />
-            <button onclick="sendMessage()">Gửi</button>
+    <div class="header">
+        <h1>💬 Nhắn tin Real-time</h1>
+        <p>Trò chuyện tức thời với SignalR</p>
+    </div>
+
+    <div class="toolbar">
+        <a href="/Products" class="btn-link">← Quay lại</a>
+        <div class="stats">
+            <span id="messageCount">0</span> tin nhắn
         </div>
     </div>
 
-    <div class="chat-area" id="chatArea">
-        <div class="empty-message">Chưa có tin nhắn. Hãy bắt đầu chat!</div>
+    <div class="chat-container">
+        <div class="chat-area scrollbar-custom" id="chatArea">
+            <div class="empty-message">👋 Chào mừng! Hãy bắt đầu nhắn tin...</div>
+        </div>
+
+        <div class="input-section">
+            <div class="form-group">
+                <label for="userName">👤 Tên của bạn</label>
+                <input type="text" id="userName" placeholder="Nhập tên của bạn" />
+            </div>
+            
+            <div class="form-group">
+                <label for="messageInput">💬 Tin nhắn</label>
+                <div class="message-input-group">
+                    <input type="text" id="messageInput" placeholder="Nhập tin nhắn (bấm Enter để gửi)..." />
+                    <button onclick="sendMessage()">Gửi</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -139,7 +298,8 @@
         chatArea.innerHTML = '';
         
         if (messages.length === 0) {
-            chatArea.innerHTML = '<div class="empty-message">Chưa có tin nhắn. Hãy bắt đầu chat!</div>';
+            chatArea.innerHTML = '<div class="empty-message">👋 Chào mừng! Hãy bắt đầu nhắn tin...</div>';
+            updateMessageCount();
             return;
         }
 
@@ -157,7 +317,12 @@
             chatArea.appendChild(msgDiv);
         });
 
+        updateMessageCount();
         chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function updateMessageCount() {
+        document.getElementById('messageCount').textContent = messages.length;
     }
 
     function escapeHtml(text) {
@@ -178,13 +343,13 @@
         const message = messageInput.value.trim();
 
         if (!userName) {
-            alert('Vui lòng nhập tên người dùng!');
+            alert('⚠️ Vui lòng nhập tên người dùng!');
             userNameInput.focus();
             return;
         }
 
         if (!message) {
-            alert('Vui lòng nhập tin nhắn!');
+            alert('⚠️ Vui lòng nhập tin nhắn!');
             messageInput.focus();
             return;
         }
@@ -196,7 +361,7 @@
             })
             .catch(err => {
                 console.error('Error sending message:', err);
-                alert('Lỗi khi gửi tin nhắn!');
+                alert('❌ Lỗi khi gửi tin nhắn!');
             });
     }
 
@@ -226,7 +391,7 @@
         })
         .catch(err => {
             console.error('❌ Lỗi kết nối:', err);
-            document.getElementById('chatArea').innerHTML = '<div class="empty-message" style="color: red;">Lỗi kết nối SignalR. Vui lòng F5 tải lại trang.</div>';
+            document.getElementById('chatArea').innerHTML = '<div class="empty-message" style="color: red;">❌ Lỗi kết nối SignalR. Vui lòng F5 tải lại trang.</div>';
         });
 </script>
 
