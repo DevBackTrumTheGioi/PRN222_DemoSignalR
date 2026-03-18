@@ -5,397 +5,88 @@
 }
 
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhắn tin Real-time</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 90vh;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 28px;
-            margin: 0;
-        }
-        
-        .header p {
-            font-size: 0.9em;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-        
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            overflow: hidden;
-        }
-        
-        .chat-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        
-        .chat-message {
-            margin-bottom: 15px;
-            animation: slideIn 0.3s ease-in;
-        }
-        
-        @@keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .message-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 5px;
-        }
-        
-        .message-user {
-            font-weight: bold;
-            color: #667eea;
-            padding: 3px 8px;
-            background-color: #f0f0f0;
-            border-radius: 3px;
-            font-size: 0.9em;
-        }
-        
-        .message-time {
-            color: #999;
-            font-size: 0.8em;
-        }
-        
-        .message-content {
-            background-color: white;
-            padding: 12px 15px;
-            border-radius: 8px;
-            color: #333;
-            word-wrap: break-word;
-            line-height: 1.4;
-            border-left: 3px solid #667eea;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .empty-message {
-            color: #ccc;
-            text-align: center;
-            padding: 40px 20px;
-            font-style: italic;
-        }
-        
-        .input-section {
-            background-color: white;
-            border-top: 1px solid #e0e0e0;
-            padding: 15px;
-            border-radius: 0 0 10px 10px;
-        }
-        
-        .form-group {
-            margin-bottom: 12px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-            font-size: 0.9em;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
-            background-color: #f8f9ff;
-        }
-        
-        .message-input-group {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .message-input-group input {
-            flex: 1;
-        }
-        
-        button {
-            padding: 10px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            min-width: 100px;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        button:active {
-            transform: translateY(0);
-        }
-        
-        .toolbar {
-            padding: 10px 15px;
-            background-color: #f5f5f5;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .btn-link {
-            display: inline-block;
-            padding: 6px 12px;
-            background-color: #6c757d;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.85em;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-link:hover {
-            background-color: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        .stats {
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        .scrollbar-custom::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .scrollbar-custom::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        .scrollbar-custom::-webkit-scrollbar-thumb {
-            background: #667eea;
-            border-radius: 3px;
-        }
-        
-        .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-            background: #764ba2;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <title>Chat Simple</title>
 </head>
 <body>
+    <h3>Chat Room</h3>
+    <a href="/Products">Back to List</a>
+    <hr />
 
-<div class="container">
-    <div class="header">
-        <h1>💬 Nhắn tin Real-time</h1>
-        <p>Trò chuyện tức thời với SignalR</p>
+    <div id="messagesList" style="border:1px solid #000; padding:8px; height:300px; overflow:auto; white-space:pre-wrap; margin-bottom:10px;"></div>
+
+    <div>
+        <input type="text" id="userInput" placeholder="Input your name" />
+        <input type="text" id="messageInput" placeholder="Input message" />
+        <button id="sendButton">Send</button>
     </div>
 
-    <div class="toolbar">
-        <a href="/Products" class="btn-link">← Quay lại</a>
-        <div class="stats">
-            <span id="messageCount">0</span> tin nhắn
-        </div>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-    <div class="chat-container">
-        <div class="chat-area scrollbar-custom" id="chatArea">
-            <div class="empty-message">👋 Chào mừng! Hãy bắt đầu nhắn tin...</div>
-        </div>
-
-        <div class="input-section">
-            <div class="form-group">
-                <label for="userName">👤 Tên của bạn</label>
-                <input type="text" id="userName" placeholder="Nhập tên của bạn" />
-            </div>
+        // Receive message from server
+        connection.on("ReceiveMessage", function (msg) {
+            var div = document.createElement("div");
+            // minimal inline spacing for each message
+            div.style.margin = "4px 0";
+            div.style.padding = "2px 0";
+            div.style.wordBreak = "break-word";
+            // Check properties casing, usually it comes as defined in C# class or camelCase
+            // msg is the object.
+            var user = msg.userName || msg.UserName;
+            var text = msg.message || msg.Message;
             
-            <div class="form-group">
-                <label for="messageInput">💬 Tin nhắn</label>
-                <div class="message-input-group">
-                    <input type="text" id="messageInput" placeholder="Nhập tin nhắn (bấm Enter để gửi)..." />
-                    <button onclick="sendMessage()">Gửi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            div.textContent = user + ": " + text;
+            document.getElementById("messagesList").appendChild(div);
+            scrollToBottom();
+        });
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
-<script>
-    const connection = new signalR.HubConnectionBuilder()
-        .withUrl("/chatHub")
-        .withAutomaticReconnect()
-        .build();
+        connection.start().then(function () {
+             console.log("SignalR Connected.");
+             // Load history via AJAX
+             fetch('/Chat?handler=GetMessages')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(msg => {
+                        var div = document.createElement("div");
+                        div.style.margin = "4px 0";
+                        div.style.padding = "2px 0";
+                        div.style.wordBreak = "break-word";
+                        var user = msg.userName || msg.UserName;
+                        var text = msg.message || msg.Message;
+                        div.textContent = user + ": " + text;
+                        document.getElementById("messagesList").appendChild(div);
+                    });
+                    scrollToBottom();
+                })
+                .catch(err => console.error(err));
 
-    let messages = [];
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
 
-    async function loadMessages() {
-        try {
-            const response = await fetch('/Chat?handler=GetMessages');
-            if (response.ok) {
-                messages = await response.json();
-                renderMessages();
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            var user = document.getElementById("userInput").value;
+            var message = document.getElementById("messageInput").value;
+            
+            if(user && message) {
+                connection.invoke("SendMessage", user, message).catch(function (err) {
+                    return console.error(err.toString());
+                });
+                document.getElementById("messageInput").value = '';
+            } else {
+                alert("Please enter name and message");
             }
-        } catch (error) {
-            console.error('Error loading messages:', error);
-        }
-    }
-
-    function renderMessages() {
-        const chatArea = document.getElementById('chatArea');
-        chatArea.innerHTML = '';
-        
-        if (messages.length === 0) {
-            chatArea.innerHTML = '<div class="empty-message">👋 Chào mừng! Hãy bắt đầu nhắn tin...</div>';
-            updateMessageCount();
-            return;
-        }
-
-        messages.forEach(msg => {
-            const time = new Date(msg.timestamp).toLocaleTimeString('vi-VN');
-            const msgDiv = document.createElement('div');
-            msgDiv.className = 'chat-message';
-            msgDiv.innerHTML = `
-                <div class="message-header">
-                    <span class="message-user">${escapeHtml(msg.userName)}</span>
-                    <span class="message-time">${time}</span>
-                </div>
-                <div class="message-content">${escapeHtml(msg.message)}</div>
-            `;
-            chatArea.appendChild(msgDiv);
+            event.preventDefault();
         });
 
-        updateMessageCount();
-        chatArea.scrollTop = chatArea.scrollHeight;
-    }
-
-    function updateMessageCount() {
-        document.getElementById('messageCount').textContent = messages.length;
-    }
-
-    function escapeHtml(text) {
-        const map = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
-        };
-        return text.replace(/[&<>"']/g, m => map[m]);
-    }
-
-    function sendMessage() {
-        const userNameInput = document.getElementById('userName');
-        const messageInput = document.getElementById('messageInput');
-        const userName = userNameInput.value.trim();
-        const message = messageInput.value.trim();
-
-        if (!userName) {
-            alert('⚠️ Vui lòng nhập tên người dùng!');
-            userNameInput.focus();
-            return;
+        function scrollToBottom() {
+            var e = document.getElementById("messagesList");
+            e.scrollTop = e.scrollHeight;
         }
-
-        if (!message) {
-            alert('⚠️ Vui lòng nhập tin nhắn!');
-            messageInput.focus();
-            return;
-        }
-
-        connection.invoke("SendMessage", userName, message)
-            .then(() => {
-                messageInput.value = '';
-                messageInput.focus();
-            })
-            .catch(err => {
-                console.error('Error sending message:', err);
-                alert('❌ Lỗi khi gửi tin nhắn!');
-            });
-    }
-
-    document.getElementById('messageInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-        }
-    });
-
-    document.getElementById('userName').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            document.getElementById('messageInput').focus();
-        }
-    });
-
-    connection.on("ReceiveMessage", (chatMessage) => {
-        messages.push(chatMessage);
-        renderMessages();
-    });
-
-    connection.start()
-        .then(() => {
-            console.log('✓ Kết nối ChatHub thành công');
-            loadMessages();
-        })
-        .catch(err => {
-            console.error('❌ Lỗi kết nối:', err);
-            document.getElementById('chatArea').innerHTML = '<div class="empty-message" style="color: red;">❌ Lỗi kết nối SignalR. Vui lòng F5 tải lại trang.</div>';
-        });
-</script>
-
+    </script>
 </body>
 </html>
